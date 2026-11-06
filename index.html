@@ -22,7 +22,19 @@ input{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);ba
 <div id="main" hidden><header class="top"><div class="brand">✳ EMBER</div><div class="date" id="todayLabel"></div></header>
 <section id="todayPage" class="page active"><div class="eyebrow">YOUR DAILY CHECK-IN</div><h1 id="welcome"></h1><p class="sub">Small actions. Compounded over time.</p><div class="card hero"><div class="heroTop"><div class="eyebrow">YOUR JOURNEY</div><span class="small muted" id="journeySince"></span></div><div class="daynum"><span id="journeyDay"></span> <small>days since you began</small></div><div class="progress"><span id="todayBar"></span></div><div class="small muted" id="todayProgress"></div></div><div class="sectionHead"><h2>Today's commitments</h2><span id="todayPct"></span></div><div id="todayGoals"></div><div class="card"><b>Consistency over perfection.</b><div class="small muted">A missed day is data, not defeat.</div></div></section>
 <section id="insightsPage" class="page"><div class="eyebrow">GOAL BY GOAL</div><h1>Your insights.</h1><p class="sub">Choose a goal to see its own timeline and consistency.</p><div class="goalSelect" id="goalPicker"></div><div id="insightDetail"></div></section>
-<section id="goalsPage" class="page"><div class="eyebrow">YOUR SYSTEM</div><h1>Your goals.</h1><p class="sub">Add goals here. Every new goal gets its own Day 1.</p><div id="goalManager"></div><div class="card"><h2 id="formTitle">Add a goal</h2><div class="goalForm"><input id="goalEmoji" maxlength="4" value="✨" aria-label="Goal emoji"><input id="goalName" maxlength="48" placeholder="e.g. Read 20 pages" aria-label="Goal name"></div><div class="actions"><button class="btn" id="saveGoal">＋ Add goal</button><button class="btn secondary" id="cancelEdit" hidden>Cancel</button></div><p class="small muted" id="formHint">This goal's tracking starts today. Existing goals and history stay unchanged.</p></div><div class="card"><h2>Journey settings</h2><p class="small muted">Overall journey began <b id="overallStart"></b>. Each goal has its own start date.</p><button class="ghost" id="export">Export my data ↗</button> <button class="ghost" id="reset">Reset app</button></div></section></div></div>
+<section id="goalsPage" class="page"><div class="eyebrow">YOUR SYSTEM</div><h1>Your goals.</h1><p class="sub">Add goals here. Every new goal gets its own Day 1.</p><div id="goalManager"></div><div class="card"><h2 id="formTitle">Add a goal</h2><div class="goalForm"><input id="goalEmoji" maxlength="4" value="✨" aria-label="Goal emoji"><input id="goalName" maxlength="48" placeholder="e.g. Read 20 pages" aria-label="Goal name"></div><div class="actions"><button class="btn" id="saveGoal">＋ Add goal</button><button class="btn secondary" id="cancelEdit" hidden>Cancel</button></div><p class="small muted" id="formHint">This goal's tracking starts today. Existing goals and history stay unchanged.</p></div><div class="card"><h2>Journey settings</h2><p class="small muted">Overall journey began <b id="overallStart"></b>. Each goal has its own start date.</p><button class="ghost" id="export">Export my data ↗</button> <button class="ghost" id="reset">Reset app</button></div></section></div><div style="text-align:center; margin-top:20px; padding-top:15px; border-top:1px solid #302d29;">
+  <div style="font-size:20px; color:#E88745;">✳</div>
+  <div style="font-weight:700; margin-top:5px;">EMBER</div>
+  <div style="font-size:11px; color:#9a9288; margin-top:5px;">
+    Created by Shraj
+  </div>
+  <div style="font-size:11px; color:#9a9288;">
+    Built with help from ChatGPT
+  </div>
+  <div style="font-size:10px; color:#756e65; margin-top:8px;">
+    © 2026 · Version 1.1
+  </div>
+</div></div>
 <nav class="nav" id="nav" hidden><button class="active" data-page="todayPage"><b>⌂</b>Today</button><button data-page="insightsPage"><b>▥</b>Insights</button><button data-page="goalsPage"><b>◎</b>Goals</button></nav><div class="toast" id="toast"></div>
 <script>
 const KEY='ember_growth_v1';let db=null,selected=null,editing=null;const $=id=>document.getElementById(id);
