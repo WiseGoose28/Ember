@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+<title id="title">EMBER app icon</title>
+<desc id="desc">A dark faceted coal with glowing orange fissures on a near-black rounded square.</desc>
+<defs>
+ <radialGradient id="bg" cx="50%" cy="48%" r="65%"><stop stop-color="#351006"/><stop offset=".52" stop-color="#160805"/><stop offset="1" stop-color="#050505"/></radialGradient>
+ <linearGradient id="stone" x1="15%" y1="5%" x2="85%" y2="100%"><stop stop-color="#8c321b"/><stop offset=".38" stop-color="#351a16"/><stop offset=".75" stop-color="#100d0d"/><stop offset="1" stop-color="#050505"/></linearGradient>
+ <linearGradient id="crack" x1="15%" y1="0%" x2="85%" y2="100%"><stop stop-color="#ffd15a"/><stop offset=".4" stop-color="#ff6a08"/><stop offset="1" stop-color="#ed2d05"/></linearGradient>
+ <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="28"/></filter>
+ <filter id="soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+ <clipPath id="rock"><path d="M178 574 252 430 359 370 472 246 676 166 742 201 829 358 824 538 748 652 573 696 351 680 236 644Z"/></clipPath>
+</defs>
+<rect x="18" y="18" width="988" height="988" rx="190" fill="#050505"/>
+<rect x="28" y="28" width="968" height="968" rx="180" fill="url(#bg)"/>
+<ellipse cx="520" cy="478" rx="350" ry="300" fill="#f04408" opacity=".2" filter="url(#glow)"/>
+<path d="M178 574 252 430 359 370 472 246 676 166 742 201 829 358 824 538 748 652 573 696 351 680 236 644Z" fill="url(#stone)" stroke="#a43a1c" stroke-opacity=".45" stroke-width="7" stroke-linejoin="round"/>
+<g clip-path="url(#rock)">
+ <path d="M178 574 252 430 359 370 472 246 676 166 742 201 594 420 450 488 280 608Z" fill="#6b2919" opacity=".72"/>
+ <path d="M472 246 676 166 742 201 829 358 690 423 594 420Z" fill="#351612" opacity=".9"/>
+ <path d="M178 574 280 608 450 488 424 690 236 644Z" fill="#090808"/>
+ <path d="M450 488 594 420 690 423 824 538 748 652 573 696 424 690Z" fill="#0a0909"/>
+ <path d="M252 430 359 370 472 246 594 420 450 488 280 608 178 574" fill="none" stroke="#d64c20" stroke-opacity=".25" stroke-width="5"/>
+</g>
+<path d="M674 210 602 408 500 472 430 542 395 642" fill="none" stroke="#ff3b05" stroke-width="58" stroke-linecap="round" stroke-linejoin="round" opacity=".75" filter="url(#glow)"/>
+<path d="M674 210 602 408 500 472 430 542 395 642" fill="none" stroke="#ff5a08" stroke-width="27" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)"/>
+<path d="M674 210 602 408 500 472 430 542 395 642" fill="none" stroke="url(#crack)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M602 408 704 454" fill="none" stroke="#ff6a0a" stroke-width="12" stroke-linecap="round"/>
+<path d="M500 472 364 486" fill="none" stroke="#ff4b07" stroke-width="10" stroke-linecap="round"/>
+<path d="M430 542 315 590" fill="none" stroke="#e93806" stroke-width="8" stroke-linecap="round"/>
+<path d="M666 230 594 410 496 475 432 540 400 620" fill="none" stroke="#ffd05a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+<path d="M180 574 252 430 359 370 472 246 676 166" fill="none" stroke="#ff7626" stroke-opacity=".72" stroke-width="8" stroke-linecap="round"/>
+</svg>
