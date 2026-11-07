@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#11100f">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">\n<link rel="apple-touch-icon" href="icon-192.png">
 <title>EMBER — Personal Growth</title>
 <style>
 :root{color-scheme:dark;--bg:#11100f;--panel:#1a1917;--panel2:#22201e;--line:#302d29;--text:#f5f0e9;--muted:#9a9288;--orange:#e88745;--orange2:#f4a66d;--r:20px}
@@ -93,17 +93,22 @@ label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
 .fileInput{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;opacity:0!important;pointer-events:none!important}
 .backupActions{align-items:center}
 
-</style>
+
+.brandLockup{display:flex;align-items:center;gap:7px}
+.brandMark{width:21px;height:21px;object-fit:contain;border-radius:50%;display:block}
+.onboardMark{width:76px;height:76px;object-fit:cover;border-radius:19px;margin:0 0 10px;box-shadow:0 0 26px #e84a1828}
+.footerMark{width:43px;height:43px;object-fit:cover;border-radius:12px;display:block;margin:0 auto 5px}
+\n</style>
 </head>
 <body>
 <div class="app">
 <div id="onboarding" class="onboard" hidden>
-  <div style="font-size:36px">✳</div><div class="brand">EMBER / PERSONAL GROWTH</div>
+  <img class="onboardMark" src="ember-mark.png" alt="EMBER glowing coal mark"><div class="brand">EMBER / PERSONAL GROWTH</div>
   <div id="ob1"><div class="step">A QUIETER KIND OF PROGRESS · 01 / 02</div><h1>Build a life you<br>show up for.</h1><p class="sub">A personal space to keep promises to yourself. No noise, just consistency.</p><label for="nickname">What should we call you?</label><input id="nickname" maxlength="24" placeholder="Your nickname"><div class="onboardActions"><button class="btn full" id="continue">Continue →</button></div></div>
   <div id="ob2" hidden><div class="step">MAKE IT YOURS · 02 / 02</div><h1>What are you<br>committing to?</h1><p class="sub">Add your starting goals and give each one an emoji.</p><div id="initialGoals"></div><button class="btn secondary full" id="addInitial">＋ Add another goal</button><div class="onboardActions"><button class="btn secondary" id="back">Back</button><button class="btn" id="begin">Start my journey →</button></div><p class="small muted">You can add more goals later without resetting your journey.</p></div>
 </div>
 <div id="main" hidden>
-  <header class="top"><div class="brand">✳ EMBER</div><div class="date" id="todayLabel"></div></header>
+  <header class="top"><div class="brand brandLockup"><img class="brandMark" src="ember-mark.png" alt=""> <span>EMBER</span></div><div class="date" id="todayLabel"></div></header>
   <section id="todayPage" class="page active">
     <h1 class="pageTitle">Today's Checklist</h1>
     <p class="sub">Small actions. Compounded over time.</p>
@@ -184,9 +189,9 @@ label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
   </section>
 </div>
 <div style="text-align:center; margin-top:20px; padding-top:15px; border-top:1px solid #302d29;">
-  <div style="font-size:20px; color:#E88745;">✳</div><div style="font-weight:700; margin-top:5px;">EMBER</div>
+  <img class="footerMark" src="ember-mark.png" alt="EMBER glowing coal mark"><div style="font-weight:700; margin-top:5px;">EMBER</div>
   <div style="font-size:11px; color:#9a9288; margin-top:5px;">Vibecoded by Shreyansh</div>
-  <div style="font-size:10px; color:#756e65; margin-top:8px;">© 2026 · Version 1.4</div>
+  <div style="font-size:10px; color:#756e65; margin-top:8px;">© 2026 · Version 1.5</div>
 </div>
 </div>
 <nav class="nav" id="nav" hidden><button class="active" data-page="todayPage"><b>⌂</b>Today</button><button data-page="insightsPage"><b>▥</b>Insights</button><button data-page="goalsPage"><b>◎</b>Goals</button></nav>
