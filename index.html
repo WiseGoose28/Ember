@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11100f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<title>EMBER — Personal Growth</title>
+<style>
+:root{color-scheme:dark;--bg:#11100f;--panel:#1a1917;--panel2:#22201e;--line:#302d29;--text:#f5f0e9;--muted:#9a9288;--orange:#e88745;--orange2:#f4a66d;--r:20px}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,sans-serif;min-height:100dvh}
+button,input{font:inherit}button{cursor:pointer;color:inherit}
+.app{max-width:520px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 18px calc(90px + env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;padding:15px 2px 12px}
+.brand,.eyebrow{color:var(--orange2);font-size:11px;font-weight:800;letter-spacing:.16em}
+.date,.muted,.sub{color:var(--muted)}.date,.small{font-size:12px}
+h1{font-size:29px;line-height:1.12;letter-spacing:-.04em;margin:8px 0 15px;color:var(--text);font-weight:800}h2{font-size:18px;margin:0}
+.sub{font-size:13px;margin:0 0 22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:17px;margin:13px 0}
+.hero{background:linear-gradient(135deg,#292019,#1b1917 72%);border-color:#493123}
+.heroTop,.sectionHead{display:flex;justify-content:space-between;align-items:center}
+.daynum{font-size:32px;font-weight:800;margin:9px 0}.daynum small{font-size:13px;color:var(--muted);font-weight:500}
+.progress{height:7px;background:#39312a;border-radius:9px;overflow:hidden;margin:13px 0 8px}
+.progress span{display:block;height:100%;background:var(--orange);border-radius:9px}
+.sectionHead{margin:24px 2px 10px}.sectionHead span{font-size:12px;color:var(--muted)}
+.habit{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:16px;margin:9px 0}
+.habit.done{border-color:#59402e;background:#211c18}.emoji{font-size:23px;width:30px;text-align:center}
+.habitInfo{flex:1;min-width:0}.habitName{font-weight:650;overflow-wrap:anywhere}
+.habitMeta{font-size:11px;color:var(--muted);margin-top:2px}
+.check{width:31px;height:31px;border-radius:10px;border:1px solid #655b51;background:transparent}
+.check.on{background:var(--orange);border-color:var(--orange);color:#21140c}
+.btn{border:0;border-radius:14px;background:var(--orange);color:#21140c;font-weight:750;padding:13px 16px}
+.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}
+.full{width:100%}.ghost{background:none;color:var(--orange2);padding:8px 4px;border:0}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);padding:10px 18px calc(10px + env(safe-area-inset-bottom));background:#151412ed;backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:space-around;z-index:5}
+.nav button{border:0;background:none;color:var(--muted);font-size:10px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 17px}
+.nav button.active{color:var(--orange2)}.nav b{font-size:20px;font-weight:500}
+.page{display:none}.page.active{display:block}
+.metricGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.todaySummary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.todaySummary .card{margin:0;padding:15px}
+.summaryValue{font-size:25px;font-weight:800;letter-spacing:-.04em;margin:8px 0 3px}
+.pageTitle{margin:7px 0 17px}
+.goalActions{display:flex;gap:6px;flex-wrap:wrap}
+.goalActions button{font-size:11px;padding:8px 10px}
+.archiveHeading{margin:24px 2px 8px;font-size:15px;font-weight:750}
+.backupActions{display:flex;gap:10px;flex-wrap:wrap}
+.backupActions>*{flex:1;min-width:120px}
+.fileInput{display:none}
+.metric{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px}
+.metric strong{display:block;font-size:25px;margin:5px 0}.metric span{font-size:11px;color:var(--muted)}
+.chart{width:100%;height:180px;display:block}
+.goalSelect{display:flex;gap:9px;overflow:auto;padding:3px 0 10px}
+.goalSelect button{flex:0 0 auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px 13px;color:var(--muted)}
+.goalSelect button.active{border-color:var(--orange);background:#2a2019;color:var(--text)}
+.insightTabs{display:flex;justify-content:center;gap:30px;margin:4px 0 23px}
+.insightTab{position:relative;border:0;background:none;color:var(--muted);font-weight:650;padding:10px 4px 12px;opacity:.48;transition:opacity .18s ease;color:var(--muted)}
+.insightTab.active{opacity:1;color:var(--text)}
+.insightTab.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;border-radius:5px;background:var(--orange)}
+.weekHead{display:flex;justify-content:space-between;align-items:center;margin:5px 1px 12px}
+.weekRange{font-size:12px;color:var(--muted)}
+.overallChart{width:100%;height:230px;display:block;overflow:visible}
+input{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);background:#12110f;color:var(--text);outline:none}
+input:focus{border-color:var(--orange)}
+label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
+.goalForm{display:grid;grid-template-columns:58px 1fr;gap:9px;margin:10px 0}
+.goalForm input:first-child{text-align:center;font-size:20px;padding:12px 4px}
+.actions{display:flex;gap:8px;margin-top:10px}.actions>*{flex:1}
+.onboard{min-height:80dvh;display:flex;flex-direction:column;justify-content:center}
+.onboard h1{font-size:35px}.step{color:var(--orange2);font-size:11px;letter-spacing:.12em;margin:12px 0}
+.onboardActions{display:flex;gap:9px;margin-top:22px}.onboardActions>*{flex:1}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#30251d;border:1px solid #69452d;color:#ffe0c7;padding:10px 15px;border-radius:30px;font-size:12px;opacity:0;z-index:10;transition:.2s}
+.toast.show{opacity:1}.empty{text-align:center;padding:30px;color:var(--muted)}
+.historyRow{display:flex;align-items:center;gap:12px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:15px;margin:9px 0}
+.historyRow input{width:22px;height:22px;accent-color:var(--orange)}
+.historyRow .historyInfo{flex:1;min-width:0}
+.historyRow .historyState{font-size:11px;color:var(--muted)}
+@media(min-width:600px){.nav{bottom:14px;border:1px solid var(--line);border-radius:22px;width:480px}}
+
+.goalCard{position:relative;align-items:flex-start;padding:15px 13px}
+.goalCard .emoji{flex:0 0 30px;margin-top:2px}
+.goalCard .habitInfo{padding-right:4px}
+.goalMenu{position:relative;flex:0 0 auto;margin-left:4px}
+.goalMenu summary{list-style:none;cursor:pointer;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:22px;line-height:1;user-select:none}
+.goalMenu summary::-webkit-details-marker{display:none}
+.goalMenu[open] summary{color:var(--orange2);border-color:var(--orange)}
+.goalMenuItems{position:absolute;right:0;top:42px;z-index:20;min-width:145px;padding:6px;background:#24211e;border:1px solid #514236;border-radius:14px;box-shadow:0 12px 30px #0009;display:grid;gap:3px}
+.goalMenuItems button{width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:11px 12px;border-radius:9px;font-size:13px}
+.goalMenuItems button:active,.goalMenuItems button:focus{background:#3a3028}
+.goalMenuItems button.danger{color:#ff9b87}
+.fileInput{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;opacity:0!important;pointer-events:none!important}
+.backupActions{align-items:center}
+
+</style>
+</head>
+<body>
+<div class="app">
+<div id="onboarding" class="onboard" hidden>
+  <div style="font-size:36px">✳</div><div class="brand">EMBER / PERSONAL GROWTH</div>
+  <div id="ob1"><div class="step">A QUIETER KIND OF PROGRESS · 01 / 02</div><h1>Build a life you<br>show up for.</h1><p class="sub">A personal space to keep promises to yourself. No noise, just consistency.</p><label for="nickname">What should we call you?</label><input id="nickname" maxlength="24" placeholder="Your nickname"><div class="onboardActions"><button class="btn full" id="continue">Continue →</button></div></div>
+  <div id="ob2" hidden><div class="step">MAKE IT YOURS · 02 / 02</div><h1>What are you<br>committing to?</h1><p class="sub">Add your starting goals and give each one an emoji.</p><div id="initialGoals"></div><button class="btn secondary full" id="addInitial">＋ Add another goal</button><div class="onboardActions"><button class="btn secondary" id="back">Back</button><button class="btn" id="begin">Start my journey →</button></div><p class="small muted">You can add more goals later without resetting your journey.</p></div>
+</div>
+<div id="main" hidden>
+  <header class="top"><div class="brand">✳ EMBER</div><div class="date" id="todayLabel"></div></header>
+  <section id="todayPage" class="page active">
+    <h1 class="pageTitle">Today's Checklist</h1>
+    <p class="sub">Small actions. Compounded over time.</p>
+    <div id="todayGoals"></div>
+    <div class="todaySummary">
+      <div class="card hero">
+        <div class="eyebrow">YOUR JOURNEY</div>
+        <div class="summaryValue">Day <span id="journeyDay"></span></div>
+        <div class="small muted" id="journeySince"></div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">TODAY'S PROGRESS</div>
+        <div class="summaryValue" id="todayPct">0%</div>
+        <div class="small muted" id="todayProgress"></div>
+        <div class="progress"><span id="todayBar"></span></div>
+      </div>
+    </div>
+    <div class="card"><b>Consistency over perfection.</b><div class="small muted">A missed day is data, not defeat.</div></div>
+  </section>
+  <section id="insightsPage" class="page">
+    <h1 class="pageTitle">Insights</h1>
+    <div class="insightTabs" role="tablist" aria-label="Insights views">
+      <button class="insightTab" id="goalTab" role="tab" aria-selected="false" aria-controls="goalSpecificPanel" onclick="setInsightsTab('goal')">Goal Specific</button>
+      <button class="insightTab active" id="overallTab" role="tab" aria-selected="true" aria-controls="overallPanel" onclick="setInsightsTab('overall')">Overall</button>
+    </div>
+    <div id="overallPanel" role="tabpanel" aria-labelledby="overallTab">
+      <div class="weekHead"><h2>This week</h2><span class="weekRange" id="weekRange"></span></div>
+      <div class="card">
+        <div class="sectionHead" style="margin:0 0 8px"><h2>Goals completed each day</h2><span>Daily total</span></div>
+        <svg id="overallWeekChart" class="overallChart" viewBox="0 0 340 230" role="img" aria-label="Number of goals completed each day this week"></svg>
+        <div class="small muted" id="overallChartNote">Counts completed check-ins across all goals active on each date.</div>
+      </div>
+    </div>
+    <div id="goalSpecificPanel" role="tabpanel" aria-labelledby="goalTab" hidden>
+      <p class="sub">Choose a goal to see its own timeline and consistency.</p>
+      <div class="goalSelect" id="goalPicker"></div><div id="insightDetail"></div>
+    </div>
+  </section>
+  <section id="goalsPage" class="page">
+    <h1 class="pageTitle">Your System</h1>
+    <p class="sub">Manage your goals. Every new goal gets its own Day 1.</p>
+    <div id="goalManager"></div>
+    <div id="archivedSection" hidden>
+      <h2 class="archiveHeading">Archived goals</h2>
+      <div id="archivedManager"></div>
+    </div>
+    <div class="card"><h2 id="formTitle">Add a goal</h2><div class="goalForm"><input id="goalEmoji" maxlength="4" value="✨" aria-label="Goal emoji"><input id="goalName" maxlength="48" placeholder="e.g. Read 20 pages" aria-label="Goal name"></div><div class="actions"><button class="btn" id="saveGoal">＋ Add goal</button><button class="btn secondary" id="cancelEdit" hidden>Cancel</button></div><p class="small muted" id="formHint">This goal's tracking starts today. Existing goals and history stay unchanged.</p></div>
+    <div class="card">
+      <h2>Journey settings</h2>
+      <p class="small muted">Overall journey began <b id="overallStart"></b>. Each goal has its own start date.</p>
+      <div class="backupActions">
+        <button class="ghost" id="export">Export my data ↗</button>
+        <button class="ghost" id="importTrigger">Import backup ↗</button>
+      </div>
+      <input class="fileInput" type="file" id="importFile" accept=".json,application/json">
+      <p class="small muted">Importing replaces the current data on this device. Export a backup first.</p>
+      <button class="ghost" id="reset">Reset app</button>
+    </div>
+    <button class="card full" id="openTimeMachine" style="text-align:left;background:var(--panel);color:var(--text);border:1px solid #59402e;display:block;width:100%">
+      <div style="display:flex;align-items:center;gap:12px"><span style="font-size:24px;color:var(--orange)">◷</span><span style="flex:1"><b>Time Machine</b><span class="small muted" style="display:block">Add or correct check-ins for previous days</span></span><span style="color:var(--muted)">›</span></div>
+    </button>
+  </section>
+  <section id="timeMachinePage" class="page">
+    <button class="ghost" id="backFromTimeMachine">← Back to Goals</button>
+    <div class="eyebrow">HISTORICAL CHECK-INS</div><h1>Time Machine.</h1>
+    <p class="sub">Forgot to record a day? Select the date and update the goals you actually completed.</p>
+    <div class="card">
+      <label for="timeMachineDate">Choose a date</label>
+      <input type="date" id="timeMachineDate">
+      <p class="small muted" id="timeMachineDateHint">Choose today or an earlier date.</p>
+    </div>
+    <div class="sectionHead"><h2>Goals for this date</h2><span id="timeMachineCount"></span></div>
+    <div id="timeMachineGoals"></div>
+    <div class="card">
+      <p class="small muted">Historical entries update the same check-in history used by your Insights charts, streaks and completion rates. Only goals that had started by the selected date are shown.</p>
+      <button class="btn full" id="saveHistorical">Save check-ins</button>
+    </div>
+  </section>
+</div>
+<div style="text-align:center; margin-top:20px; padding-top:15px; border-top:1px solid #302d29;">
+  <div style="font-size:20px; color:#E88745;">✳</div><div style="font-weight:700; margin-top:5px;">EMBER</div>
+  <div style="font-size:11px; color:#9a9288; margin-top:5px;">Vibecoded by Shreyansh</div>
+  <div style="font-size:10px; color:#756e65; margin-top:8px;">© 2026 · Version 1.4</div>
+</div>
+</div>
+<nav class="nav" id="nav" hidden><button class="active" data-page="todayPage"><b>⌂</b>Today</button><button data-page="insightsPage"><b>▥</b>Insights</button><button data-page="goalsPage"><b>◎</b>Goals</button></nav>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='ember_growth_v1';
+let db=null,selected=null,editing=null,insightsTab='overall';
+const $=id=>document.getElementById(id);
+const iso=d=>{let x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
+const today=()=>iso(new Date()),date=s=>new Date(s+'T12:00:00'),diff=(a,b)=>Math.floor((date(b)-date(a))/86400000),pretty=s=>date(s).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function buzz(n=15){try{navigator.vibrate?.(n)}catch(e){}}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function start(g){return g.startDate||db.startDate}
+function elapsed(g){return Math.max(1,diff(start(g),today())+1)}
+function done(g,d=today()){return d>=start(g)&&!!db.logs[d]?.[g.id]}
+function onboard(){$('onboarding').hidden=false;$('main').hidden=true;$('nav').hidden=true;$('ob1').hidden=false;$('ob2').hidden=true;$('initialGoals').innerHTML='';initialRow('🎯','')}
+function initialRow(e='',n=''){let r=document.createElement('div');r.className='goalForm';r.innerHTML=`<input maxlength="4" aria-label="Emoji" value="${esc(e)}"><input maxlength="48" aria-label="Goal name" placeholder="e.g. Read 20 pages" value="${esc(n)}">`;$('initialGoals').append(r)}
+$('continue').onclick=()=>{if(!$('nickname').value.trim())return toast('Add a nickname first');$('ob1').hidden=true;$('ob2').hidden=false;buzz()};
+$('back').onclick=()=>{$('ob2').hidden=true;$('ob1').hidden=false};$('addInitial').onclick=()=>initialRow('✨','');
+$('begin').onclick=()=>{let goals=[...$('initialGoals').children].map(r=>({id:crypto.randomUUID(),emoji:r.children[0].value.trim()||'✨',name:r.children[1].value.trim(),startDate:today()})).filter(g=>g.name);if(!goals.length)return toast('Add at least one goal');db={nickname:$('nickname').value.trim(),startDate:today(),goals,logs:{}};save();show()};
+function show(){$('onboarding').hidden=true;$('main').hidden=false;$('nav').hidden=false;render()}
+function load(){try{db=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!db?.nickname||!db.goals?.length)return onboard();let changed=false;db.logs??={};db.goals.forEach(g=>{if(!g.startDate){g.startDate=db.startDate||today();changed=true}});if(changed)save();show()}
+function render(){
+  let t=today(),active=db.goals.filter(g=>!g.archivedAt&&t>=start(g)),count=active.filter(g=>done(g)).length,p=active.length?Math.round(count/active.length*100):0;
+  $('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
+  $('journeyDay').textContent=Math.max(1,diff(db.startDate,t)+1);
+  $('journeySince').textContent='Since '+pretty(db.startDate);
+  $('todayBar').style.width=p+'%';
+  $('todayProgress').textContent=`${count} of ${active.length} active goals completed`;
+  $('todayPct').textContent=p+'%';
+  $('todayGoals').innerHTML='';
+  if(!active.length)$('todayGoals').innerHTML='<div class="empty">No active goals today. Add one in the Goals tab.</div>';
+  active.forEach(g=>{
+    let yes=done(g),el=document.createElement('div');el.className='habit'+(yes?' done':'');
+    el.innerHTML=`<div class="emoji">${esc(g.emoji)}</div><div class="habitInfo"><div class="habitName">${esc(g.name)}</div><div class="habitMeta">${yes?'Completed today':'Tap to mark complete'} · Day ${diff(start(g),t)+1}</div></div><button class="check ${yes?'on':''}">${yes?'✓':''}</button>`;
+    el.querySelector('button').onclick=()=>{db.logs[t]??={};if(db.logs[t][g.id])delete db.logs[t][g.id];else db.logs[t][g.id]=true;save();buzz();render()};
+    $('todayGoals').append(el);
+  });
+  renderManager();$('overallStart').textContent=pretty(db.startDate);renderInsights();
+}
+function renderManager(){
+  const active=db.goals.filter(g=>!g.archivedAt),archived=db.goals.filter(g=>!!g.archivedAt);
+  $('goalManager').innerHTML='';
+  if(!active.length)$('goalManager').innerHTML='<div class="empty">No active goals. Add one below or restore an archived goal.</div>';
+  active.forEach(g=>{
+    let el=document.createElement('div');el.className='habit goalCard';
+    el.innerHTML=`<div class="emoji">${esc(g.emoji)}</div><div class="habitInfo"><div class="habitName">${esc(g.name)}</div><div class="habitMeta">Started ${pretty(start(g))} · ${elapsed(g)} days tracked</div></div><details class="goalMenu"><summary aria-label="Options for ${esc(g.name)}" title="Goal options">⋮</summary><div class="goalMenuItems"><button type="button" data-action="edit">Edit</button><button type="button" data-action="archive">Archive</button><button type="button" class="danger" data-action="delete">Delete</button></div></details>`;
+    const menu=el.querySelector('.goalMenu');
+    menu.querySelector('[data-action="edit"]').onclick=()=>{menu.open=false;edit(g.id)};
+    menu.querySelector('[data-action="archive"]').onclick=()=>{menu.open=false;archiveGoal(g.id)};
+    menu.querySelector('[data-action="delete"]').onclick=()=>{menu.open=false;deleteGoal(g.id)};
+    $('goalManager').append(el);
+  });
+  $('archivedSection').hidden=!archived.length;
+  $('archivedManager').innerHTML='';
+  archived.forEach(g=>{
+    let el=document.createElement('div');el.className='habit goalCard';
+    el.innerHTML=`<div class="emoji">${esc(g.emoji)}</div><div class="habitInfo"><div class="habitName">${esc(g.name)}</div><div class="habitMeta">Archived ${pretty(g.archivedAt)} · Started ${pretty(start(g))}</div></div><details class="goalMenu"><summary aria-label="Options for archived goal ${esc(g.name)}" title="Goal options">⋮</summary><div class="goalMenuItems"><button type="button" data-action="restore">Restore</button><button type="button" class="danger" data-action="delete">Delete</button></div></details>`;
+    const menu=el.querySelector('.goalMenu');
+    menu.querySelector('[data-action="restore"]').onclick=()=>{menu.open=false;restoreGoal(g.id)};
+    menu.querySelector('[data-action="delete"]').onclick=()=>{menu.open=false;deleteGoal(g.id)};
+    $('archivedManager').append(el);
+  });
+}
+function archiveGoal(id){
+  const g=db.goals.find(x=>x.id===id);if(!g)return;
+  if(!confirm(`Archive "${g.name}"? It will leave active tracking, but its past check-ins will be preserved.`))return;
+  g.archivedAt=today();save();if(editing===id)clearForm();render();toast('Goal archived');
+}
+function restoreGoal(id){
+  const g=db.goals.find(x=>x.id===id);if(!g)return;
+  if(!confirm(`Restore "${g.name}" to active goals? Its original start date and history will be preserved.`))return;
+  delete g.archivedAt;save();render();toast('Goal restored');
+}
+function deleteGoal(id){
+  const g=db.goals.find(x=>x.id===id);if(!g)return;
+  if(!confirm(`Permanently delete "${g.name}" and ALL its historical check-ins? This cannot be undone. Export a backup first if you may need this history.`))return;
+  db.goals=db.goals.filter(x=>x.id!==id);
+  Object.keys(db.logs||{}).forEach(day=>{if(db.logs[day]){delete db.logs[day][id];if(!Object.keys(db.logs[day]).length)delete db.logs[day]}});
+  if(selected===id)selected=null;if(editing===id)clearForm();
+  save();render();toast('Goal permanently deleted');
+}
+function edit(id){let g=db.goals.find(x=>x.id===id);editing=id;$('formTitle').textContent='Edit goal';$('goalEmoji').value=g.emoji;$('goalName').value=g.name;$('saveGoal').textContent='Save changes';$('cancelEdit').hidden=false;$('formHint').textContent='Editing a goal does not change its start date or check-in history.';$('goalName').focus()}
+function clearForm(){editing=null;$('formTitle').textContent='Add a goal';$('goalEmoji').value='✨';$('goalName').value='';$('saveGoal').textContent='＋ Add goal';$('cancelEdit').hidden=true;$('formHint').textContent="This goal's tracking starts today. Existing goals and history stay unchanged."}
+$('cancelEdit').onclick=clearForm;
+$('saveGoal').onclick=()=>{let name=$('goalName').value.trim(),emoji=$('goalEmoji').value.trim()||'✨';if(!name)return toast('Enter a goal name');if(editing){let g=db.goals.find(x=>x.id===editing);g.name=name;g.emoji=emoji;toast('Goal updated')}else{let g={id:crypto.randomUUID(),name,emoji,startDate:today()};db.goals.push(g);selected=g.id;toast('Goal added · Day 1 starts today')}save();buzz(22);clearForm();render()};
+function setInsightsTab(tab){insightsTab=tab;const goal=tab==='goal';$('goalTab').classList.toggle('active',goal);$('overallTab').classList.toggle('active',!goal);$('goalTab').setAttribute('aria-selected',String(goal));$('overallTab').setAttribute('aria-selected',String(!goal));$('goalSpecificPanel').hidden=!goal;$('overallPanel').hidden=goal;buzz(8);if(goal)renderGoalInsights();else renderOverallInsights()}
+function renderInsights(){setInsightsTab(insightsTab)}
+function renderOverallInsights(){
+  const now=date(today()),weekday=(now.getDay()+6)%7,monday=new Date(now);monday.setDate(now.getDate()-weekday);
+  const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return iso(d)});
+  $('weekRange').textContent=date(days[0]).toLocaleDateString(undefined,{day:'numeric',month:'short'})+' – '+date(days[6]).toLocaleDateString(undefined,{day:'numeric',month:'short'});
+  const countable=(g,d)=>d>=start(g)&&(!g.archivedAt||d<=g.archivedAt);
+  const values=days.map(d=>{if(d>today())return null;const eligible=db.goals.filter(g=>countable(g,d));return eligible.filter(g=>!!db.logs[d]?.[g.id]).length});
+  const maxGoals=Math.max(1,...days.map(d=>db.goals.filter(g=>countable(g,d)).length));
+  const maxVal=Math.max(1,maxGoals),plot={left:34,right:330,top:16,bottom:184},height=plot.bottom-plot.top,width=plot.right-plot.left;
+  let svg='';
+  for(let tick=0;tick<=maxVal;tick++){const y=plot.bottom-(tick/maxVal)*height;svg+=`<line x1="${plot.left}" x2="${plot.right}" y1="${y}" y2="${y}" stroke="#39332d" stroke-dasharray="3 4"/><text x="24" y="${y+3}" text-anchor="end" fill="#938a80" font-size="9">${tick}</text>`}
+  const slot=width/7,barW=Math.min(23,slot*.52);
+  days.forEach((d,i)=>{const x=plot.left+i*slot+(slot-barW)/2,label=date(d).toLocaleDateString(undefined,{weekday:'short'});if(values[i]!==null){const v=values[i],barH=(v/maxVal)*height,y=plot.bottom-barH;svg+=`<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(0,barH)}" rx="5" fill="#e88745" opacity=".95"/><text x="${x+barW/2}" y="${Math.max(11,y-6)}" text-anchor="middle" fill="#f5f0e9" font-size="9">${v}</text>`}else{svg+=`<line x1="${x+barW/2}" x2="${x+barW/2}" y1="${plot.bottom-2}" y2="${plot.bottom}" stroke="#655b51"/>`}svg+=`<text x="${plot.left+i*slot+slot/2}" y="207" text-anchor="middle" fill="#938a80" font-size="9">${label}</text>`});
+  $('overallWeekChart').innerHTML=svg;
+  $('overallChartNote').textContent='Daily completed goals out of the goals that had started by each date. Future days are left blank.';
+}
+function renderGoalInsights(){const activeGoals=db.goals.filter(g=>!g.archivedAt);if(!activeGoals.length){$('goalPicker').innerHTML='';$('insightDetail').innerHTML='<div class="empty">Add or restore an active goal to see its insights.</div>';return}if(!activeGoals.some(g=>g.id===selected))selected=activeGoals[0].id;$('goalPicker').innerHTML='';activeGoals.forEach(g=>{let b=document.createElement('button');b.className=g.id===selected?'active':'';b.textContent=g.emoji+' '+g.name;b.onclick=()=>{selected=g.id;renderGoalInsights();buzz(8)};$('goalPicker').append(b)});
+let g=db.goals.find(x=>x.id===selected),n=elapsed(g),checks=0,streak=0,longest=0,run=0;for(let i=0;i<n;i++){let d=iso(new Date(date(start(g)).getTime()+i*86400000));if(done(g,d)){checks++;run++;longest=Math.max(longest,run)}else run=0}let cursor=done(g,today())?today():iso(new Date(date(today()).getTime()-86400000));for(let i=0;i<n;i++){let d=iso(new Date(date(cursor).getTime()-i*86400000));if(done(g,d))streak++;else break}let rate=Math.round(checks/n*100),pts=[];for(let i=13;i>=0;i--){let d=iso(new Date(date(today()).getTime()-i*86400000));if(d>=start(g))pts.push({d,v:done(g,d)?100:0})}
+let grid=[0,50,100].map(v=>`<line x1="26" x2="332" y1="${144-v*1.32}" y2="${144-v*1.32}" stroke="#39332d" stroke-dasharray="3 4"/><text x="1" y="${148-v*1.32}" fill="#938a80" font-size="9">${v}</text>`).join(''),path=pts.map((p,i)=>`${i?'L':'M'} ${26+i*306/Math.max(1,pts.length-1)} ${144-p.v*1.32}`).join(' ');
+let chart=pts.length?grid+`<path d="${path}" fill="none" stroke="#e88745" stroke-width="2.8" stroke-linecap="round"/>`+pts.map((p,i)=>`<circle cx="${26+i*306/Math.max(1,pts.length-1)}" cy="${144-p.v*1.32}" r="3" fill="#f4a66d"/><text x="${26+i*306/Math.max(1,pts.length-1)}" y="173" text-anchor="middle" fill="#938a80" font-size="8">${i%2===0?date(p.d).getDate():''}</text>`).join(''):'';
+$('insightDetail').innerHTML=`<div class="card hero"><div class="eyebrow">GOAL TIMELINE</div><h2 style="font-size:22px;margin-top:9px">${esc(g.emoji)} ${esc(g.name)}</h2><div class="daynum">Day ${n}</div><div class="small muted">Started ${pretty(start(g))}</div><div class="progress"><span style="width:${rate}%"></span></div><div class="small muted">${checks} completed check-ins across ${n} tracked days</div></div><div class="metricGrid"><div class="metric"><span>COMPLETION RATE</span><strong>${rate}%</strong><span>since this goal began</span></div><div class="metric"><span>CURRENT STREAK</span><strong>${streak} days</strong><span>consecutive completed days</span></div><div class="metric"><span>LONGEST STREAK</span><strong>${longest} days</strong><span>best consecutive run</span></div><div class="metric"><span>CHECK-INS</span><strong>${checks}</strong><span>days completed</span></div><div class="metric"><span>DAYS TRACKED</span><strong>${n}</strong><span>since ${pretty(start(g))}</span></div></div><div class="card"><div class="sectionHead"><h2>Daily activity</h2><span>Last 14 days</span></div><svg class="chart" viewBox="0 0 340 180" role="img" aria-label="Daily completion chart">${chart}</svg><div class="small muted">100 = completed · 0 = not completed</div></div><div class="card small muted">This goal's personal tracking clock began on <b>${pretty(start(g))}</b>. Other goals have independent timelines.</div>`}
+$('export').onclick=()=>{
+  const backup={format:'ember-growth-backup',version:2,exportedAt:new Date().toISOString(),data:db};
+  let a=document.createElement('a'),u=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));
+  a.href=u;a.download='ember-growth-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast('Backup exported');
+};
+$('importTrigger').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  try{
+    const parsed=JSON.parse(await file.text());
+    const candidate=parsed?.format==='ember-growth-backup'?parsed.data:parsed;
+    const valid=candidate&&typeof candidate==='object'&&typeof candidate.nickname==='string'&&candidate.nickname.trim()&&typeof candidate.startDate==='string'&&Array.isArray(candidate.goals)&&candidate.goals.length>0&&candidate.logs&&typeof candidate.logs==='object'&&!Array.isArray(candidate.logs);
+    if(!valid)throw new Error('This does not look like a valid EMBER backup.');
+    const ids=new Set();
+    for(const g of candidate.goals){
+      if(!g||typeof g.id!=='string'||!g.id||ids.has(g.id)||typeof g.name!=='string'||!g.name.trim()||typeof (g.startDate||candidate.startDate)!=='string')throw new Error('The backup contains an invalid or duplicate goal.');
+      ids.add(g.id);
+    }
+    for(const [day,entries] of Object.entries(candidate.logs)){
+      if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(day)||!entries||typeof entries!=='object'||Array.isArray(entries))throw new Error('The backup contains invalid check-in records.');
+      for(const [id,value] of Object.entries(entries))if(!ids.has(id)||value!==true)throw new Error('The backup contains check-ins that do not match its goals.');
+    }
+    if(!confirm('Import this EMBER backup? This will REPLACE all current goals and check-ins on this device. Export your current data first if you want to keep it.'))return;
+    candidate.archivedGoals??=[];
+    candidate.goals.forEach(g=>{g.startDate??=candidate.startDate});
+    localStorage.setItem(KEY,JSON.stringify(candidate));db=candidate;selected=null;editing=null;clearForm();show();toast('Backup restored successfully');
+  }catch(err){alert('Could not import backup: '+(err.message||'Invalid file.'))}
+  finally{$('importFile').value=''}
+};
+$('reset').onclick=()=>{if(confirm('Permanently delete your profile and check-in history on this device?')){localStorage.removeItem(KEY);location.reload()}};
+
+// Time Machine: edit the existing date -> goal-ID check-in map.
+// It deliberately uses the same localStorage structure as ordinary check-ins.
+function renderTimeMachine(){
+  const chosen=$('timeMachineDate').value||today();
+  const eligible=db.goals.filter(g=>chosen>=start(g)&&(!g.archivedAt||chosen<=g.archivedAt));
+  $('timeMachineCount').textContent=eligible.length+' eligible';
+  $('timeMachineGoals').innerHTML='';
+  if(chosen>today()){$('timeMachineGoals').innerHTML='<div class="empty">Future dates cannot be edited.</div>';$('saveHistorical').disabled=true;return}
+  $('saveHistorical').disabled=false;
+  if(!eligible.length){$('timeMachineGoals').innerHTML='<div class="empty">No goals had started on this date.</div>';return}
+  eligible.forEach(g=>{
+    const checked=!!db.logs[chosen]?.[g.id];
+    const row=document.createElement('label');
+    row.className='historyRow';
+    row.innerHTML=`<span class="emoji">${esc(g.emoji)}</span><span class="historyInfo"><span class="habitName">${esc(g.name)}</span><span class="historyState" style="display:block">${checked?'Already recorded':'Not recorded'}</span></span><input type="checkbox" data-goal-id="${esc(g.id)}" ${checked?'checked':''} aria-label="Mark ${esc(g.name)} complete">`;
+    $('timeMachineGoals').append(row);
+  });
+}
+function openTimeMachine(){
+  $('timeMachineDate').max=today();
+  $('timeMachineDate').value=today();
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='timeMachinePage'));
+  $('nav').hidden=true;
+  renderTimeMachine();
+  window.scrollTo({top:0,behavior:'instant'});
+  buzz(8);
+}
+function closeTimeMachine(){
+  $('timeMachinePage').classList.remove('active');
+  $('goalsPage').classList.add('active');
+  $('nav').hidden=false;
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page==='goalsPage'));
+  render();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+$('openTimeMachine').onclick=openTimeMachine;
+$('backFromTimeMachine').onclick=closeTimeMachine;
+$('timeMachineDate').addEventListener('change',renderTimeMachine);
+$('saveHistorical').onclick=()=>{
+  const chosen=$('timeMachineDate').value;
+  if(!chosen||chosen>today())return toast('Choose a valid past or current date');
+  const eligible=db.goals.filter(g=>chosen>=start(g)&&(!g.archivedAt||chosen<=g.archivedAt));
+  db.logs[chosen]??={};
+  eligible.forEach(g=>{
+    const checkbox=$('timeMachineGoals').querySelector(`input[data-goal-id="${CSS.escape(g.id)}"]`);
+    if(checkbox?.checked)db.logs[chosen][g.id]=true;
+    else delete db.logs[chosen][g.id];
+  });
+  if(!Object.keys(db.logs[chosen]).length)delete db.logs[chosen];
+  save();
+  buzz(22);
+  toast('Historical check-ins saved');
+  renderTimeMachine();
+};
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===b.dataset.page));
+  $('nav').hidden=false;
+  if(b.dataset.page==='insightsPage'){insightsTab='overall';renderInsights()}
+  buzz(8)
+});
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+load();
+</script>
+</body>
+</html>
