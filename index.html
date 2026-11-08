@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#11100f">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg">
+<link rel="icon" href="ember-icon.svg" type="image/svg+xml">
 <title>EMBER — Personal Growth</title>
 <style>
 :root{color-scheme:dark;--bg:#11100f;--panel:#1a1917;--panel2:#22201e;--line:#302d29;--text:#f5f0e9;--muted:#9a9288;--orange:#e88745;--orange2:#f4a66d;--r:20px}
@@ -93,6 +93,86 @@ label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
 .fileInput{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;opacity:0!important;pointer-events:none!important}
 .backupActions{align-items:center}
 
+
+/* EMBER V1.5 — warm, atmospheric visual refresh */
+:root{
+  --bg:#0d0c0b;--panel:#191613;--panel2:#211b17;--line:#352a22;
+  --text:#f6f0e9;--muted:#a0968b;--orange:#f07832;--orange2:#ff9a52;
+  --r:22px
+}
+html{background:var(--bg)}
+body{
+  background:
+    radial-gradient(ellipse 100% 43% at 8% -4%,rgba(232,104,42,.24),transparent 70%),
+    radial-gradient(ellipse 68% 34% at 100% 0%,rgba(173,76,30,.13),transparent 72%),
+    linear-gradient(180deg,#100d0b 0%,#0d0c0b 42%,#0d0c0b 100%);
+  background-attachment:fixed;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.app{padding-top:calc(env(safe-area-inset-top) + 5px)}
+.welcome{display:flex;align-items:center;justify-content:space-between;padding:19px 3px 18px;gap:10px}
+.welcomeLeft{display:flex;align-items:center;gap:12px;min-width:0}
+.brandMark{width:43px;height:43px;display:grid;place-items:center;flex:0 0 auto;border-radius:13px;
+  background:linear-gradient(145deg,#ff873d,#d94e16);color:#fff2e7;font-size:23px;
+  box-shadow:0 5px 22px #ed6c2b40,inset 0 1px #ffffff45}
+.welcomeCopy{min-width:0}
+.welcomeCopy .date{font-size:10px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:#9e8e80;margin-bottom:2px}
+.greeting{font-size:17px;font-weight:720;letter-spacing:-.025em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.journeyBadge{display:flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid #774324;border-radius:999px;background:#3a2116a8;color:#ffad72;white-space:nowrap;font-size:11px}
+.journeyBadge span{font-size:12px;color:var(--orange)}
+.journeyBadge strong{font-weight:750}
+.pageTitle{font-size:17px;line-height:1.2;letter-spacing:-.02em;font-weight:780;color:#fff;margin:0}
+.progressCard{margin:4px 0 25px;padding:19px 19px 15px;border-radius:25px;
+  background:linear-gradient(145deg,rgba(39,30,24,.96),rgba(23,20,18,.98) 66%);
+  border:1px solid #44342a;box-shadow:0 12px 32px #0003,inset 0 1px #ffffff08}
+.progressCardTop{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:105px}
+.progressCopy{min-width:0}
+.progressCopy .eyebrow{font-size:10px;letter-spacing:.12em;color:#a99b8e}
+.progressFraction{display:flex;align-items:baseline;gap:5px;margin:3px 0 1px;font-family:Georgia,"Times New Roman",serif;font-size:53px;line-height:1.08;letter-spacing:-.055em;color:#f8f1e9}
+.fractionDivider{color:#8e8176;font-weight:400}
+.progressMessage{font-size:12px;max-width:220px}
+.progressRing{--ring:0%;width:72px;height:72px;flex:0 0 72px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--orange) var(--ring),#40352e 0deg);position:relative}
+.progressRing:before{content:"";position:absolute;inset:5px;border-radius:50%;background:#211b17}
+.progressRingInner{position:relative;z-index:1;font-size:14px;font-weight:750}
+.weekDivider{height:1px;background:#3a3029;margin:17px 0 13px}
+.weekStrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.weekDay{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.weekDayLabel{font-size:9px;color:#a89b8f;font-weight:650}
+.weekDayBox{height:29px;width:100%;max-width:43px;border-radius:10px;display:grid;place-items:center;
+  background:#2b211a;border:1px solid #483326;color:#e9b18b;font-size:10px;font-weight:700}
+.weekDayBox.today{border-color:#f18a4b;box-shadow:0 0 0 1px #f18a4b30}
+.weekDayBox.future{background:#211d19;border-color:#302a25;color:#655c54}
+.weekDayBox.emptyDay{background:#211d19;border-color:#302a25;color:#766b61}
+.habitsHeading{margin:0 3px 10px;align-items:center}
+.habitsHeading h1{margin:0}
+.habitsHeading span{font-size:11px;color:var(--muted)}
+.habit{gap:12px;padding:13px 13px;border-radius:17px;margin:9px 0;background:linear-gradient(110deg,#1c1916,#171513);border-color:#302a25;transition:background .18s,border-color .18s,transform .15s}
+.habit:active{transform:scale(.99)}
+.habit.done{background:linear-gradient(110deg,#342014,#241912);border-color:#754626}
+.emoji{width:39px;height:39px;display:grid;place-items:center;flex:0 0 39px;border-radius:13px;background:#29221c;font-size:19px}
+.habit.done .emoji{background:#4a2a19}
+.habitName{font-size:14px;font-weight:700;letter-spacing:-.01em}
+.habitMeta{font-size:11px;color:#9e9388;margin-top:3px}
+.check{width:31px;height:31px;flex:0 0 31px;border-radius:50%;border:1px solid #625044;background:#211c18;color:#ffad72;font-size:15px;display:grid;place-items:center}
+.check.on{background:var(--orange);border-color:var(--orange);color:#24150d;box-shadow:0 3px 12px #ed6c2b38}
+.journeyCard{margin-top:22px;background:linear-gradient(130deg,#2b1c13,#1a1714 75%);border-color:#4b3324}
+.journeyValue{font-family:Georgia,"Times New Roman",serif;font-size:29px;margin:5px 0 1px}
+.encouragement{background:#171513;border-color:#2d2823}
+.card{box-shadow:0 5px 20px #00000012}
+.nav{background:#15120fee;border-top-color:#352a22;backdrop-filter:blur(20px)}
+.nav button.active{color:#ff9a52}
+.insightTabs{margin-top:0}
+.metric,.card:not(.progressCard){border-color:#352a22}
+.hero{background:linear-gradient(135deg,#302016,#1b1714 72%)}
+.btn{background:linear-gradient(135deg,#ff914b,#ed6e2c)}
+.goalMenuItems{background:#26201b;border-color:#514033}
+input{background:#15120f}
+@media(max-width:370px){
+ .progressFraction{font-size:46px}.progressRing{width:64px;height:64px;flex-basis:64px}
+ .weekStrip{gap:4px}.weekDayBox{height:27px}
+}
+
 </style>
 </head>
 <body>
@@ -103,25 +183,39 @@ label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
   <div id="ob2" hidden><div class="step">MAKE IT YOURS · 02 / 02</div><h1>What are you<br>committing to?</h1><p class="sub">Add your starting goals and give each one an emoji.</p><div id="initialGoals"></div><button class="btn secondary full" id="addInitial">＋ Add another goal</button><div class="onboardActions"><button class="btn secondary" id="back">Back</button><button class="btn" id="begin">Start my journey →</button></div><p class="small muted">You can add more goals later without resetting your journey.</p></div>
 </div>
 <div id="main" hidden>
-  <header class="top"><div class="brand">✳ EMBER</div><div class="date" id="todayLabel"></div></header>
-  <section id="todayPage" class="page active">
-    <h1 class="pageTitle">Today's Checklist</h1>
-    <p class="sub">Small actions. Compounded over time.</p>
-    <div id="todayGoals"></div>
-    <div class="todaySummary">
-      <div class="card hero">
-        <div class="eyebrow">YOUR JOURNEY</div>
-        <div class="summaryValue">Day <span id="journeyDay"></span></div>
-        <div class="small muted" id="journeySince"></div>
-      </div>
-      <div class="card">
-        <div class="eyebrow">TODAY'S PROGRESS</div>
-        <div class="summaryValue" id="todayPct">0%</div>
-        <div class="small muted" id="todayProgress"></div>
-        <div class="progress"><span id="todayBar"></span></div>
+  <header class="welcome">
+    <div class="welcomeLeft">
+      <div class="brandMark" aria-hidden="true">✳</div>
+      <div class="welcomeCopy">
+        <div class="date" id="todayLabel"></div>
+        <div class="greeting" id="greeting">Good morning</div>
       </div>
     </div>
-    <div class="card"><b>Consistency over perfection.</b><div class="small muted">A missed day is data, not defeat.</div></div>
+    <div class="journeyBadge"><span>✦</span><strong id="journeyBadge">1 day</strong></div>
+  </header>
+  <section id="todayPage" class="page active">
+    <div class="card progressCard">
+      <div class="progressCardTop">
+        <div class="progressCopy">
+          <div class="eyebrow">TODAY'S PROGRESS</div>
+          <div class="progressFraction"><span id="todayDoneCount">0</span><span class="fractionDivider">/</span><span id="todayTotalCount">0</span></div>
+          <div class="small muted progressMessage" id="todayProgress">Your progress starts here.</div>
+        </div>
+        <div class="progressRing" id="progressRing" role="img" aria-label="0 percent complete">
+          <div class="progressRingInner"><strong id="todayPct">0%</strong></div>
+        </div>
+      </div>
+      <div class="weekDivider"></div>
+      <div class="weekStrip" id="weekStrip" aria-label="This week's completed goals"></div>
+    </div>
+    <div class="sectionHead habitsHeading"><h1 class="pageTitle">Today's Checklist</h1><span id="habitCount"></span></div>
+    <div id="todayGoals"></div>
+    <div class="card journeyCard">
+      <div class="eyebrow">YOUR JOURNEY</div>
+      <div class="journeyValue">Day <span id="journeyDay"></span></div>
+      <div class="small muted" id="journeySince"></div>
+    </div>
+    <div class="card encouragement"><b>Consistency over perfection.</b><div class="small muted">A missed day is data, not defeat.</div></div>
   </section>
   <section id="insightsPage" class="page">
     <h1 class="pageTitle">Insights</h1>
@@ -186,7 +280,7 @@ label{display:block;font-size:12px;color:var(--muted);margin:16px 0 7px}
 <div style="text-align:center; margin-top:20px; padding-top:15px; border-top:1px solid #302d29;">
   <div style="font-size:20px; color:#E88745;">✳</div><div style="font-weight:700; margin-top:5px;">EMBER</div>
   <div style="font-size:11px; color:#9a9288; margin-top:5px;">Vibecoded by Shreyansh</div>
-  <div style="font-size:10px; color:#756e65; margin-top:8px;">© 2026 · Version 1.4</div>
+  <div style="font-size:10px; color:#756e65; margin-top:8px;">© 2026 · Version 1.5</div>
 </div>
 </div>
 <nav class="nav" id="nav" hidden><button class="active" data-page="todayPage"><b>⌂</b>Today</button><button data-page="insightsPage"><b>▥</b>Insights</button><button data-page="goalsPage"><b>◎</b>Goals</button></nav>
@@ -211,19 +305,45 @@ $('back').onclick=()=>{$('ob2').hidden=true;$('ob1').hidden=false};$('addInitial
 $('begin').onclick=()=>{let goals=[...$('initialGoals').children].map(r=>({id:crypto.randomUUID(),emoji:r.children[0].value.trim()||'✨',name:r.children[1].value.trim(),startDate:today()})).filter(g=>g.name);if(!goals.length)return toast('Add at least one goal');db={nickname:$('nickname').value.trim(),startDate:today(),goals,logs:{}};save();show()};
 function show(){$('onboarding').hidden=true;$('main').hidden=false;$('nav').hidden=false;render()}
 function load(){try{db=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!db?.nickname||!db.goals?.length)return onboard();let changed=false;db.logs??={};db.goals.forEach(g=>{if(!g.startDate){g.startDate=db.startDate||today();changed=true}});if(changed)save();show()}
+function renderWeekStrip(){
+  const now=date(today()),offset=(now.getDay()+6)%7,monday=new Date(now);
+  monday.setDate(now.getDate()-offset);
+  const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return iso(d)});
+  const labels=['M','T','W','T','F','S','S'];
+  $('weekStrip').innerHTML='';
+  days.forEach((d,i)=>{
+    const eligible=db.goals.filter(g=>d>=start(g)&&(!g.archivedAt||d<=g.archivedAt));
+    const completed=eligible.filter(g=>!!db.logs[d]?.[g.id]).length;
+    const future=d>today(),isToday=d===today();
+    const box=document.createElement('div');box.className='weekDay';
+    const state=future?'future':eligible.length?'':'emptyDay';
+    box.innerHTML=`<span class="weekDayLabel">${labels[i]}</span><span class="weekDayBox ${state} ${isToday?'today':''}">${future?'':eligible.length?completed:'–'}</span>`;
+    box.title=future?`${labels[i]} · Upcoming`: `${completed} of ${eligible.length} goals completed`;
+    $('weekStrip').append(box);
+  });
+}
 function render(){
   let t=today(),active=db.goals.filter(g=>!g.archivedAt&&t>=start(g)),count=active.filter(g=>done(g)).length,p=active.length?Math.round(count/active.length*100):0;
-  $('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});
-  $('journeyDay').textContent=Math.max(1,diff(db.startDate,t)+1);
-  $('journeySince').textContent='Since '+pretty(db.startDate);
-  $('todayBar').style.width=p+'%';
-  $('todayProgress').textContent=`${count} of ${active.length} active goals completed`;
+  const hour=new Date().getHours();
+  $('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
+  $('greeting').textContent=(hour<12?'Good morning':hour<17?'Good afternoon':'Good evening')+', '+db.nickname;
+  const journeyDays=Math.max(1,diff(db.startDate,t)+1);
+  $('journeyDay').textContent=journeyDays;
+  $('journeyBadge').textContent=journeyDays+' '+(journeyDays===1?'day':'days');
+  $('journeySince').textContent='Your journey began '+pretty(db.startDate);
+  $('todayDoneCount').textContent=count;
+  $('todayTotalCount').textContent=active.length;
   $('todayPct').textContent=p+'%';
+  $('progressRing').style.setProperty('--ring',(p*3.6)+'deg');
+  $('progressRing').setAttribute('aria-label',p+' percent complete');
+  $('todayProgress').textContent=!active.length?'Add a goal to begin your progress.':count===active.length?'Everything complete. You showed up today.':`${active.length-count} ${active.length-count===1?'goal':'goals'} left to close the loop`;
+  $('habitCount').textContent=active.length?`${count}/${active.length} done`:'';
+  renderWeekStrip();
   $('todayGoals').innerHTML='';
   if(!active.length)$('todayGoals').innerHTML='<div class="empty">No active goals today. Add one in the Goals tab.</div>';
   active.forEach(g=>{
     let yes=done(g),el=document.createElement('div');el.className='habit'+(yes?' done':'');
-    el.innerHTML=`<div class="emoji">${esc(g.emoji)}</div><div class="habitInfo"><div class="habitName">${esc(g.name)}</div><div class="habitMeta">${yes?'Completed today':'Tap to mark complete'} · Day ${diff(start(g),t)+1}</div></div><button class="check ${yes?'on':''}">${yes?'✓':''}</button>`;
+    el.innerHTML=`<div class="emoji">${esc(g.emoji)}</div><div class="habitInfo"><div class="habitName">${esc(g.name)}</div><div class="habitMeta">${yes?'Completed today':'Tap to mark complete'} · Day ${diff(start(g),t)+1}</div></div><button class="check ${yes?'on':''}" aria-label="${yes?'Mark incomplete':'Mark complete'}: ${esc(g.name)}">${yes?'✓':''}</button>`;
     el.querySelector('button').onclick=()=>{db.logs[t]??={};if(db.logs[t][g.id])delete db.logs[t][g.id];else db.logs[t][g.id]=true;save();buzz();render()};
     $('todayGoals').append(el);
   });
